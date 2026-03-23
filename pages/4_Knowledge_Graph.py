@@ -15,6 +15,8 @@ from graph.ontology_alignment import align_triplets, detect_cross_domain, infer_
 from db.connection import run_query, run_insert
 
 st.set_page_config(page_title="KnowMap — Knowledge Graph", page_icon="🌐", layout="wide")
+from ui_setup import add_background
+add_background()
 
 # ── Auth Guard ────────────────────────────────────────────
 token = st.session_state.get("jwt_token")
@@ -35,9 +37,9 @@ st.markdown("<h1>🌐 Knowledge Graph Explorer</h1>", unsafe_allow_html=True)
 st.divider()
 
 # ────────────────────────────────────────────────────────────────
-#  STEP 1: Select source of triplets
+#  Select source of triplets
 # ────────────────────────────────────────────────────────────────
-st.markdown("### Step 1 — Select Triplet Source")
+st.markdown("### Select Triplet Source")
 source_mode = st.radio("Load triplets from:",
                         ["📝 Current pipeline session", "💾 Saved dataset (from DB)", "💾 Load saved graph"],
                         horizontal=True)
@@ -99,10 +101,10 @@ if not triplets:
     st.stop()
 
 # ────────────────────────────────────────────────────────────────
-#  STEP 2: Ontology Alignment
+#  Ontology Alignment
 # ────────────────────────────────────────────────────────────────
 st.divider()
-st.markdown("### Step 2 — Ontology Alignment & Domain Detection")
+st.markdown("### Ontology Alignment & Domain Detection")
 col_align1, col_align2 = st.columns(2)
 run_align  = col_align1.checkbox("Apply synonym normalisation", value=True)
 run_cross  = col_align2.checkbox("Detect cross-domain relations", value=True)
@@ -118,10 +120,10 @@ for t in triplets:
         t["domain"] = infer_domain(f"{t['head']} {t['relation']} {t['tail']}")
 
 # ────────────────────────────────────────────────────────────────
-#  STEP 3: Build & Visualise
+#  Build & Visualise
 # ────────────────────────────────────────────────────────────────
 st.divider()
-st.markdown("### Step 3 — Graph Visualisation & Analytics")
+st.markdown("### Graph Visualisation & Analytics")
 
 G = build_graph(triplets)
 analytics = get_analytics(G)

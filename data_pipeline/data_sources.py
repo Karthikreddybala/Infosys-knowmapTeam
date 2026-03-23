@@ -35,7 +35,11 @@ def fetch_arxiv(topic: str, max_papers: int = 20) -> list[str]:
     """
     Search ArXiv for `topic`, combine title + abstract into sentences.
     """
-    client = arxiv.Client()
+    client = arxiv.Client(
+        page_size=100,
+        delay_seconds=5.0,
+        num_retries=5
+    )
     search = arxiv.Search(query=topic, max_results=max_papers,
                           sort_by=arxiv.SortCriterion.Relevance)
     sentences = []

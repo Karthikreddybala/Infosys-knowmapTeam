@@ -7,11 +7,28 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from auth.auth_manager import register_user
 
 st.set_page_config(page_title="KnowMap — Register", page_icon="📝", layout="centered")
+from ui_setup import add_background
+add_background()
 
-st.markdown("<h1 style='text-align:center;color:#1E90FF;'>📝 Create Account</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center;color:#7eb8f7;'>📝 Create Account</h1>", unsafe_allow_html=True)
+st.markdown("""
+<div style="
+    background: rgba(30,144,255,0.08);
+    border: 1px solid rgba(30,144,255,0.25);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    color: #7eb8f7;
+    margin-bottom: 1rem;
+    text-align: center;
+">
+    🔒 <strong>Secured with JWT</strong> — Your session will be protected by a signed JSON Web Token.
+    Passwords are hashed and never stored in plain text.
+</div>
+""", unsafe_allow_html=True)
 st.divider()
 
-DOMAINS = ["AI", "Cybersecurity", "Climate", "Business", "General"]
+DOMAINS = ["AI", "Cybersecurity"]
 
 with st.form("register_form"):
     col1, col2 = st.columns(2)

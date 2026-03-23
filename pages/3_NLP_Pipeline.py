@@ -15,6 +15,8 @@ from data_pipeline.triplet_formation import (
 )
 
 st.set_page_config(page_title="KnowMap — NLP Pipeline", page_icon="⚙️", layout="wide")
+from ui_setup import add_background
+add_background()
 
 # ── Auth Guard ────────────────────────────────────────────
 token = st.session_state.get("jwt_token")
@@ -36,7 +38,7 @@ st.markdown("<h1>⚙️ NLP Pipeline — Data Ingestion & Extraction</h1>", unsa
 st.markdown("Select a data source, run the NLP pipeline to extract entities and relational triplets, then save results.")
 st.divider()
 
-DOMAINS = ["AI", "Cybersecurity", "Climate", "Business", "General"]
+DOMAINS = ["AI", "Cybersecurity"]
 
 # ────────────────────────────────────────────────────────────────
 #  TABS: one per source type
@@ -89,9 +91,13 @@ with tab_arxiv:
     arxiv_domain = col2.selectbox("Knowledge Domain", DOMAINS, key="arxiv_dom")
     arxiv_papers = st.slider("Max papers to fetch", 5, 50, 15, key="arxiv_n")
     if st.button("Fetch & Extract", type="primary", key="btn_arxiv"):
-        with st.spinner(f"Searching ArXiv: '{arxiv_query}'…"):
-            sents = fetch_arxiv(arxiv_query, arxiv_papers)
-        run_pipeline_ui(sents, arxiv_domain, f"ArXiv:{arxiv_query}", "arxiv")
+        try:
+            with st.spinner(f"Searching ArXiv: '{arxiv_query}'…"):
+                sents = fetch_arxiv(arxiv_query, arxiv_papers)
+            run_pipeline_ui(sents, arxiv_domain, f"ArXiv:{arxiv_query}", "arxiv")
+        except Exception as e:
+            st.error(f"Failed to fetch from ArXiv: {str(e)}")
+            st.info("ArXiv might be rate-limiting requests. Please try again in a few moments.")
 
 # ── CSV Tab ───────────────────────────────────────────────
 with tab_csv:

@@ -15,6 +15,8 @@ from admin.metrics import (
 from db.connection import run_query, run_insert
 
 st.set_page_config(page_title="KnowMap — Admin", page_icon="🛡️", layout="wide")
+from ui_setup import add_background
+add_background()
 
 # ── Auth Guard ────────────────────────────────────────────
 token   = st.session_state.get("jwt_token")

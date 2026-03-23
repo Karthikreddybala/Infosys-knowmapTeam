@@ -17,6 +17,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="auto",
 )
+from ui_setup import add_background
+add_background()
 
 # ── Init DB on first run ──────────────────────────────────
 @st.cache_resource(show_spinner="Connecting to database...")
@@ -29,20 +31,7 @@ def _init():
 
 db_status = _init()
 
-# ── Global CSS ────────────────────────────────────────────
-st.markdown("""
-<style>
-    [data-testid="stSidebar"] { background: #0e1117; }
-    .main .block-container { padding-top: 2rem; }
-    h1 { color: #1E90FF; }
-    .stButton > button {
-        border-radius: 8px; font-weight: bold;
-        background: linear-gradient(135deg, #1E90FF, #0068C9);
-        color: white; border: none;
-    }
-    .stButton > button:hover { opacity: 0.88; }
-</style>
-""", unsafe_allow_html=True)
+
 
 # ── Auth state helper ─────────────────────────────────────
 def get_current_user():
@@ -88,6 +77,20 @@ with col2:
                 st.error(msg)
 
     st.markdown("")
+    st.markdown("""
+    <div style="
+        background: rgba(30,144,255,0.08);
+        border: 1px solid rgba(30,144,255,0.25);
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        color: #7eb8f7;
+        margin-bottom: 0.8rem;
+    ">
+        🔒 <strong>Secured with JWT</strong> — Sessions are authenticated using signed JSON Web Tokens.
+        Your credentials are never stored in plain text.
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("Don't have an account?")
     if st.button("📝 Register Here", use_container_width=True):
         st.switch_page("pages/1_Register.py")

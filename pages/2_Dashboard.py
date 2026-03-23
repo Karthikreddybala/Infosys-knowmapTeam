@@ -9,6 +9,8 @@ from auth.auth_manager import decode_token, get_user_by_id, update_user_preferen
 from db.connection import run_query
 
 st.set_page_config(page_title="KnowMap — Dashboard", page_icon="🏠", layout="wide")
+from ui_setup import add_background
+add_background()
 
 # ── Auth Guard ────────────────────────────────────────────
 token = st.session_state.get("jwt_token")
@@ -54,7 +56,7 @@ col_pref, col_graphs = st.columns([1, 2])
 
 with col_pref:
     st.markdown("### ⚙️ Domain Preferences")
-    DOMAINS = ["AI", "Cybersecurity", "Climate", "Business", "General"]
+    DOMAINS = ["AI", "Cybersecurity"]
     current = list(user.get("domain_preferences") or [])
     new_sel = []
     for d in DOMAINS:

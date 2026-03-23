@@ -12,6 +12,8 @@ from graph.graph_visualizer import draw_graph
 from db.connection import run_query
 
 st.set_page_config(page_title="KnowMap — Semantic Search", page_icon="🔍", layout="wide")
+from ui_setup import add_background
+add_background()
 
 # ── Auth Guard ────────────────────────────────────────────
 token = st.session_state.get("jwt_token")
@@ -39,8 +41,8 @@ def get_engine():
 
 engine = get_engine()
 
-# ── Step 1: Select graph ──────────────────────────────────
-st.markdown("### Step 1 — Select Knowledge Graph")
+# ── Select graph ──────────────────────────────────
+st.markdown("### Select Knowledge Graph")
 
 graph_source = st.radio("Load from:", ["📝 Current session graph", "💾 Saved graph (DB)"], horizontal=True)
 
@@ -82,9 +84,9 @@ else:
     if not triplets:
         st.stop()
 
-# ── Step 2: Index graph ───────────────────────────────────
+# ── Index graph ───────────────────────────────────
 st.divider()
-st.markdown("### Step 2 — Query the Graph")
+st.markdown("### Query the Graph")
 
 with st.spinner("Indexing graph embeddings…"):
     engine.ingest_graph(triplets)

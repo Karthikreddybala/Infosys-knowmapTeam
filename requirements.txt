@@ -12,21 +12,19 @@ bcrypt>=4.1.2
 PyJWT>=2.8.0
 python-dotenv>=1.0.0
 
-# NLP (forced to use precompiled wheels to prevent build timeouts)
-blis==0.7.11
-spacy==3.7.4
+# NLP
+spacy>=3.8.0
 # spaCy model — auto-installs on Streamlit Cloud
-en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
 
 # Data Sources
 wikipedia-api>=0.6.0
 arxiv>=2.1.0
 
 # ML / Embeddings
-# Force CPU versions to prevent ~3GB CUDA download limits on Streamlit Cloud
+sentence-transformers>=2.6.1
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch>=2.0.0
-sentence-transformers>=2.6.1
 
 # PDF
 PyMuPDF>=1.23.0
@@ -35,5 +33,5 @@ PyMuPDF>=1.23.0
 pandas>=2.0.0
 networkx>=3.0
 
-# Summarization
+# Summarization (optional, for document summary)
 transformers>=4.38.0

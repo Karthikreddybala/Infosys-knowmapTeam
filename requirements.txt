@@ -1,0 +1,35 @@
+# KnowMap — Python Dependencies
+
+# Web UI
+streamlit>=1.31.0
+streamlit-agraph>=0.0.45
+
+# Database
+psycopg2-binary>=2.9.9
+
+# Auth
+bcrypt>=4.1.2
+PyJWT>=2.8.0
+python-dotenv>=1.0.0
+
+# NLP
+spacy>=3.7.0
+# Run after install: python -m spacy download en_core_web_sm
+
+# Data Sources
+wikipedia-api>=0.6.0
+arxiv>=2.1.0
+
+# ML / Embeddings
+sentence-transformers>=2.6.1
+torch>=2.0.0
+
+# PDF
+PyMuPDF>=1.23.0
+
+# Data handling
+pandas>=2.0.0
+networkx>=3.0
+
+# Summarization (optional, for document summary)
+transformers>=4.38.0

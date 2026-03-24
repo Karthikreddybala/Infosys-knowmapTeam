@@ -225,3 +225,25 @@ def add_background():
         }}
     </style>
     """, unsafe_allow_html=True)
+
+
+def feedback_form(user_id, target_type, reference_id=None, container=None):
+    """
+    Renders a reusable feedback form for the website or a specific graph.
+    """
+    target = container if container else st
+    
+    with target.form(key=f"feedback_form_{target_type}_{reference_id}"):
+        st.markdown(f"#### Leave {target_type.capitalize()} Feedback")
+        rating = st.slider("Rating (1-5 Stars)", min_value=1, max_value=5, value=5)
+        comments = st.text_area("Additional Comments")
+        submit_btn = st.form_submit_button("Submit Feedback")
+        
+        if submit_btn:
+            from db.connection import run_insert
+            sql = "INSERT INTO feedback (user_id, feedback_type, reference_id, rating, comments) VALUES (%s, %s, %s, %s, %s)"
+            try:
+                run_insert(sql, (user_id, target_type, reference_id, rating, comments))
+                st.success("Thank you for your feedback!")
+            except Exception as e:
+                st.error(f"Failed to submit feedback: {e}")

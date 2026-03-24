@@ -15,7 +15,7 @@ from graph.ontology_alignment import align_triplets, detect_cross_domain, infer_
 from db.connection import run_query, run_insert
 
 st.set_page_config(page_title="KnowMap — Knowledge Graph", page_icon="🌐", layout="wide")
-from ui_setup import add_background
+from ui_setup import add_background, feedback_form
 add_background()
 
 # ── Auth Guard ────────────────────────────────────────────
@@ -223,3 +223,15 @@ if st.button("➕ Add Triplet"):
         st.success("Triplet added. The graph above will update on next interaction.")
     else:
         st.error("All three fields required.")
+
+# ── Graph Feedback ─────────────────────────────────────────
+if source_mode == "💾 Load saved graph" and "g_id" in locals():
+    st.divider()
+    feedback_form(user_id=user_id, target_type="graph", reference_id=g_id)
+elif triplets and source_mode != "💾 Load saved graph":
+    # Let them save first, or just show feedback if there's a graph id in session
+    saved_g_id = st.session_state.get("saved_graph_id")
+    if saved_g_id:
+        st.divider()
+        feedback_form(user_id=user_id, target_type="graph", reference_id=saved_g_id)
+

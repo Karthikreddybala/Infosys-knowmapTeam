@@ -40,9 +40,9 @@ with st.sidebar:
 st.markdown("<h1>🛡️ Admin Dashboard</h1>", unsafe_allow_html=True)
 st.divider()
 
-tab_monitor, tab_refine, tab_metrics, tab_users, tab_logs = st.tabs([
+tab_monitor, tab_refine, tab_metrics, tab_users, tab_feedback, tab_logs = st.tabs([
     "📡 Pipeline Monitor", "✏️ Graph Refinement", "📊 Quality Metrics",
-    "👥 User Management", "📋 Action Logs"
+    "👥 User Management", "💬 User Feedback", "📋 Action Logs"
 ])
 
 # ────────────────────────────────────────────────────────────────
@@ -183,7 +183,23 @@ with tab_users:
         st.info("No users found.")
 
 # ────────────────────────────────────────────────────────────────
-#  Tab 5 — Action Logs
+#  Tab 5 — User Feedback
+# ────────────────────────────────────────────────────────────────
+with tab_feedback:
+    st.markdown("### User Feedback")
+    feedbacks = run_query(
+        """SELECT f.id, u.username, f.feedback_type, f.reference_id, f.rating, f.comments, f.created_at
+           FROM feedback f JOIN users u ON f.user_id = u.id ORDER BY f.created_at DESC"""
+    )
+    if feedbacks:
+        import pandas as pd
+        fb_df = pd.DataFrame(feedbacks)
+        st.dataframe(fb_df, use_container_width=True)
+    else:
+        st.info("No feedback received yet.")
+
+# ────────────────────────────────────────────────────────────────
+#  Tab 6 — Action Logs
 # ────────────────────────────────────────────────────────────────
 with tab_logs:
     st.markdown("### Recent Admin Actions")

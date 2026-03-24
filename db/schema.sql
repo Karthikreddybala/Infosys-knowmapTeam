@@ -69,3 +69,14 @@ CREATE TABLE IF NOT EXISTS admin_logs (
     details    TEXT         DEFAULT '',
     created_at TIMESTAMP    DEFAULT NOW()
 );
+
+-- 7. FEEDBACK
+CREATE TABLE IF NOT EXISTS feedback (
+    id              SERIAL PRIMARY KEY,
+    user_id         INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    feedback_type   VARCHAR(50) NOT NULL,  -- 'website' or 'graph'
+    reference_id    INTEGER,               -- e.g., graph_id if feedback_type is 'graph'
+    rating          INTEGER CHECK (rating >= 1 AND rating <= 5),
+    comments        TEXT,
+    created_at      TIMESTAMP DEFAULT NOW()
+);

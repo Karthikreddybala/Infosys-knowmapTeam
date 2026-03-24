@@ -2,12 +2,7 @@
 -- Run this as the postgres superuser:
 --   & "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d knowmap -f db/schema.sql
 
--- ── Grant public schema access (required for PostgreSQL 15+) ──
-GRANT ALL ON SCHEMA public TO knowmap_user;
-
--- ── Also allow knowmap_user to create objects ──
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES    TO knowmap_user;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO knowmap_user;
+-- (Note: Cloud database users from Neon or Supabase already own the schema and tables they create)
 
 -- 1. USERS
 CREATE TABLE IF NOT EXISTS users (

@@ -13,7 +13,7 @@ from auth.auth_manager import login_user, decode_token
 # ── Page config ──────────────────────────────────────────
 st.set_page_config(
     page_title="FusionGraph",
-    page_icon="🌐",
+    page_icon="🧬",
     layout="wide",
     initial_sidebar_state="auto",
 )
@@ -47,7 +47,7 @@ if user:
     st.switch_page("pages/2_Dashboard.py")
 
 # ── Login UI ──────────────────────────────────────────────
-st.markdown("<h1 style='text-align:center;'>FusionGraph: A cross-domain knowledge mapping tool</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center;'>🧬 FusionGraph</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center;color:#888;'>Real-Time Knowledge Graph Extraction & Semantic Search</p>",
             unsafe_allow_html=True)
 st.divider()

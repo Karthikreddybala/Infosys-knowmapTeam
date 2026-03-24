@@ -14,6 +14,9 @@ from config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
 
 def get_connection():
     """Return a new psycopg2 connection. Caller is responsible for closing it."""
+    from config import DATABASE_URL
+    if DATABASE_URL:
+        return psycopg2.connect(DATABASE_URL, sslmode='require')
     return psycopg2.connect(
         host=DB_HOST,
         port=DB_PORT,

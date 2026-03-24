@@ -23,6 +23,7 @@ def _get(key: str, default: str = "") -> str:
     return os.getenv(key, default)
 
 # PostgreSQL
+DATABASE_URL = _get("DATABASE_URL", "")
 DB_HOST     = _get("DB_HOST", "localhost")
 DB_PORT     = int(_get("DB_PORT", "5432"))
 DB_NAME     = _get("DB_NAME", "knowmap")

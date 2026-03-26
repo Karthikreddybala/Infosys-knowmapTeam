@@ -29,7 +29,7 @@ GRANT ALL PRIVILEGES ON DATABASE knowmap TO knowmap_user;
 
 ## Step 2 — Configure the `.env` File
 
-Open `c:\Users\saket\Infosys\knowmap\.env` and fill in your credentials:
+Open `.env` in the project root and fill in your credentials:
 
 ```env
 DB_HOST=localhost
@@ -49,7 +49,7 @@ NEWS_API_KEY=
 
 ## Step 3 — Install Python Dependencies
 
-Open a terminal in `c:\Users\saket\Infosys\knowmap\` and run:
+Open a terminal in the project root and run:
 
 ```powershell
 pip install -r requirements.txt

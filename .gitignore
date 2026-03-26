@@ -147,6 +147,24 @@ venv.bak/
 # Streamlit secrets (never commit)
 .streamlit/secrets.toml
 
+# Node.js (not used in core app)
+node_modules/
+package-lock.json
+
+# Large data / output files (FusionGraph pipeline outputs)
+FusionGraph/*.csv
+FusionGraph/*.json
+FusionGraph/*.jsonl
+
+# Large images committed to root (exclude if large)
+*.jpeg
+*.jpg
+!img1.jpeg
+!img2.jpg
+!img3.jpeg
+!img4.jpeg
+!img5.jpg
+
 # Spyder project settings
 .spyderproject
 .spyproject
